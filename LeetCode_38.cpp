@@ -36,7 +36,7 @@ string countAndSay(int n)
 				count++;
 				continue;
 			}
-			result = result+to_string(count)+temp[i];
+			result = result + to_string(count) + temp[i];
 			count = 1;
 		}
 		return result;
