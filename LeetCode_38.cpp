@@ -11,7 +11,13 @@
 11 is read off as "two 1s" or 21.
 21 is read off as "one 2, then one 1" or 1211.
 解题思想：递归
-	      to_string能将int转为string
+          1 如果n=1，直接返回1
+		  2 如果不等，递归调用countAndSay(n-1)存入temp中
+		  3 对temp遍历，碰到不一样的重置count，result+count+temp[i]
+		    碰到一样的count++
+		  4 最终返回result
+
+to_string能将int转为string
 */
 
 #include "iostream"
