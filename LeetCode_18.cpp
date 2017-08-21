@@ -18,7 +18,14 @@ A solution set is:
 
 思想与3sum相似，整体大致相同，要注意避免重复的问题
 */
+#include "stdafx.h"
+#include "iostream"
+#include "string"
+#include "Algorithm"
+#include "vector"
+#include "stack"
 
+using namespace std;
 vector<vector<int>> fourSum(vector<int>& nums, int target) {
 	vector<vector<int>>result;
 	if (nums.size()<4)
