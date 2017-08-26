@@ -1,10 +1,7 @@
 /*
 39.Combination Sum
-
 Given a set of candidate numbers (C) (without duplicates) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.
-
 The same repeated number may be chosen from C unlimited number of times.
-
 Note:
 All numbers (including target) will be positive integers.
 The solution set must not contain duplicate combinations.
@@ -15,11 +12,11 @@ A solution set is:
 [2, 2, 3]
 ]
 解题思想：递归回溯
-          首先对candidates排序
-          用r记录当前位，不断循环r到candidates.size()，一旦发现之前temp记录的总和sum+candidates[i]与target相等，将temp加入result中，return
-		  如果sum<target，将candidates[i]加入temp中，递归dfs(i, candidates.size(), candidates, sum, target, result, temp);
-		  temp.pop_back()，这是因为当前位的情况都已遍历完，需要将当前位弹出，为压入后一位
-		  如果sum>target,直接return
+首先对candidates排序
+用r记录当前位，不断循环r到candidates.size()，一旦发现之前temp记录的总和sum+candidates[i]与target相等，将temp加入result中，return
+如果sum<target，将candidates[i]加入temp中，递归dfs(i, candidates.size(), candidates, sum, target, result, temp);
+temp.pop_back()，这是因为当前位的情况都已遍历完，需要将当前位弹出，为压入后一位
+如果sum>target,直接return
 */
 
 #include "iostream"
@@ -85,4 +82,3 @@ int main()
 	while (1);
 	return 0;
 }
-
