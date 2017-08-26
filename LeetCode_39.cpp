@@ -12,11 +12,13 @@ A solution set is:
 [2, 2, 3]
 ]
 解题思想：递归回溯
-首先对candidates排序
-用r记录当前位，不断循环r到candidates.size()，一旦发现之前temp记录的总和sum+candidates[i]与target相等，将temp加入result中，return
-如果sum<target，将candidates[i]加入temp中，递归dfs(i, candidates.size(), candidates, sum, target, result, temp);
-temp.pop_back()，这是因为当前位的情况都已遍历完，需要将当前位弹出，为压入后一位
-如果sum>target,直接return
+          首先对candidates排序
+          用temp记录每次递归加的candidates[i],用r记录candidates当前位置，不断循环i=r到candidates.size()
+		  一旦发现之前temp记录的总和sum+candidates[i]与target相等，将temp加入result中，return
+          如果sum<target，说明当前candidates[i]可能是一个可行解的组成部分，
+		  将candidates[i]加入temp中，递归dfs(i, candidates.size(), candidates, sum, target, result, temp);
+          temp.pop_back()，这是因为当前位的情况都已遍历完，需要将当前位弹出，为压入后一位做准备
+          如果sum>target,说明继续遍历都无法得到最优解，直接return
 */
 
 #include "iostream"
