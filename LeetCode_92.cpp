@@ -11,9 +11,10 @@ Note:
 Given m, n satisfy the following condition:
 1 ≤ m ≤ n ≤ length of list.
 
-解题思路：设置三个定位变量分别为i,j,index，用来定位nums1，nums2，nums1合并后的位置
-          从nums1，nums2的最后向前遍历，大的值存到nums1的index的位置，index--
-		  将剩下的nums1或nums2的元素直接赋值给nums1前面的空位
+解题思路：1 - 2 - 3 - 4 - 5 m=2 n =4
+          也就是说我们要调换2 3 4
+		  那么首先调换3与2，让1 - 3 - 2 - 4 - 5
+		  再调换4与3，让1 - 4 - 3 - 2 - 5
 */
 
 /**
