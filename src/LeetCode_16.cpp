@@ -6,13 +6,18 @@ Given an array S of n integers, find three integers in S such that the sum is cl
 For example, given array S = {-1 2 1 -4}, and target = 1.
 
 The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
-解题思想：1.首先对输入进行排序
-	      2.初步定义一个三个数和（头三个数）ans，并算一下与target的差值diff
-		  3.定义一个i,j,k分别记录三个数的位置，对这不断循环遍历，计算三个数的和，
-		    如果等于target直接return
-			如果与target差值小于当前最小差值diff，更新diff以及ans
-			根据sum与target的大小关系更新j,k位置
+锟斤拷锟斤拷思锟诫：1.锟斤拷锟饺讹拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+	      2.锟斤拷锟斤拷锟斤拷锟斤拷一锟斤拷锟斤拷锟斤拷锟斤拷锟酵ｏ拷头锟斤拷锟斤拷锟斤拷锟斤拷ans锟斤拷锟斤拷锟斤拷一锟斤拷锟斤拷target锟侥诧拷值diff
+		  3.锟斤拷锟斤拷一锟斤拷i,j,k锟街憋拷锟斤拷录锟斤拷锟斤拷锟斤拷锟斤拷位锟矫ｏ拷锟斤拷锟解不锟斤拷循锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟侥和ｏ拷
+		    锟斤拷锟斤拷锟斤拷锟斤拷target直锟斤拷return
+			锟斤拷锟斤拷锟斤拷target锟斤拷值小锟节碉拷前锟斤拷小锟斤拷值diff锟斤拷锟斤拷锟斤拷diff锟皆硷拷ans
+			锟斤拷锟斤拷sum锟斤拷target锟侥达拷小锟斤拷系锟斤拷锟斤拷j,k位锟斤拷
 */
+#include "iostream"
+#include "string"
+#include "algorithm"
+#include "vector"
+#include "stack"
 
 int threeSumClosest(vector<int>& nums, int target) {
 	sort(nums.begin(), nums.end());
