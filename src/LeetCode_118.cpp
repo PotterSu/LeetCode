@@ -75,6 +75,5 @@ int main()
 				cout << result[i][j] << " ";
 		}
 	}
-
 	return 0;
 }
