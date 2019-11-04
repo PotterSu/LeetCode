@@ -34,50 +34,43 @@ using namespace std;
    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  };
 
-void sort(TreeNode* t, int left, int right, vector<int> nums)
-{
-    int middle = (left + right) / 2;
-    t = new TreeNodenums[middle];
-}
 
 TreeNode* sortedArrayToBST(vector<int>& nums)
 {
-    int right = nums.size() - 1;
-    int left = 0;
-    int middle = (left + right) / 2;
+    if(nums.size() == 0)
+    {
+        return NULL;
+    }
+    if(nums.size() == 1)
+    {
+        return new TreeNode(nums[0]);
+    }
 
-    TreeNode* t = new TreeNode(nums[len / 2]);
-    sort(t->left, left, middle - 1);
-    sort(t->right, middle + 1, right);
+    int middle = nums.size() / 2;
+    cout << "middle " << middle << endl;
+    for(int i = 0; i < nums.size(); i++)
+    {
+        cout << " " << nums[i];
+    }
+    cout << endl;
+    vector<int> nums_left(nums.begin(), nums.begin() + middle);
+    vector<int> nums_right(nums.begin() + middle + 1, nums.end());
+    TreeNode* t = new TreeNode(nums[middle]);
+    t->left = sortedArrayToBST(nums_left);
+    t->right = sortedArrayToBST(nums_right);
+    return t;
 }
 
 
 int main()
 {
-    TreeNode* t1 = new TreeNode(3);
-    // t1->left = new TreeNode(9);
-    // t1->right = new TreeNode(20);
-    // t1->right->left = new TreeNode(15);
-    // t1->right->right = new TreeNode(7);
-
-    // TreeNode* t2 = new TreeNode(1);
-    // t2->left = new TreeNode(2);
-    // t2->right = new TreeNode(3);
     vector<int> nums;
     nums.push_back(-10);
     nums.push_back(-3);
     nums.push_back(0);
     nums.push_back(5);
     nums.push_back(9);
-    vector<vector<int>> result = sortedArrayToBST(nums);
-    for(int i = 0; i < result.size(); i++)
-    {
-        for(int j = 0; j < result[i].size(); j++)
-        {
-            cout << result[i][j] << " ";
-        }
-        cout << endl;
-    }
+    TreeNode* result = sortedArrayToBST(nums);
 
 	return 0;
 }
