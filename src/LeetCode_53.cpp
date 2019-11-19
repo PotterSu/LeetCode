@@ -1,42 +1,54 @@
 /*
-53. ×î´ó×ÓĞòºÍ
-¸ø¶¨Ò»¸öÕûÊıÊı×é nums £¬ÕÒµ½Ò»¸ö¾ßÓĞ×î´óºÍµÄÁ¬Ğø×ÓÊı×é£¨×ÓÊı×é×îÉÙ°üº¬Ò»¸öÔªËØ£©£¬·µ»ØÆä×î´óºÍ¡£
+53. æœ€å¤§å­åºå’Œ
+ç»™å®šä¸€ä¸ªæ•´æ•°æ•°ç»„ numsÂ ï¼Œæ‰¾åˆ°ä¸€ä¸ªå…·æœ‰æœ€å¤§å’Œçš„è¿ç»­å­æ•°ç»„ï¼ˆå­æ•°ç»„æœ€å°‘åŒ…å«ä¸€ä¸ªå…ƒç´ ï¼‰ï¼Œè¿”å›å…¶æœ€å¤§å’Œã€‚
 
-Ê¾Àı:
+ç¤ºä¾‹:
 
-ÊäÈë: [-2,1,-3,4,-1,2,1,-5,4],
-Êä³ö: 6
-½âÊÍ: Á¬Ğø×ÓÊı×é [4,-1,2,1] µÄºÍ×î´óÎª 6¡£
+è¾“å…¥: [-2,1,-3,4,-1,2,1,-5,4],
+è¾“å‡º: 6
+è§£é‡Š:Â è¿ç»­å­æ•°ç»„Â [4,-1,2,1] çš„å’Œæœ€å¤§ï¼Œä¸ºÂ 6ã€‚
+è¿›é˜¶:
 
-½âÌâË¼Â·£ºÓÃÊı×éa[i]´æ´¢ÒÔµÚi¸öÊıÎª½áÎ²µÄ×î´óÁ¬Ğø×ÓĞòÁĞ£¬
-          ÄÇÃ´ÕâÑù·ÖÎªÁ½ÖÖÇé¿ö£º
-		  1.Èç¹ûa[i-1]<0,Ôòa[i] = nums[i]
-		  2.·´Ö®£¬Ôòa[i] = a[i-1]+nums[i]
-		  ÕâÑùÒ»ÌË±éÀúÏÂÀ´¿ÉÒÔµÃµ½ÒÔnums[i]½áÎ²µÄ×î´óÁ¬Ğø×ÓĞòÁĞa[i]
-		  Ö»ĞèÒªÕÒµ½×î´óµÄa[i]¾Í¿ÉÒÔ
+å¦‚æœä½ å·²ç»å®ç°å¤æ‚åº¦ä¸º O(n) çš„è§£æ³•ï¼Œå°è¯•ä½¿ç”¨æ›´ä¸ºç²¾å¦™çš„åˆ†æ²»æ³•æ±‚è§£ã€‚
+
 */
 
 #include "iostream"
 #include "vector"
 using namespace std;
-int maxSubArray(vector<int>& nums) {
-	int *a = new int[nums.size()];
-	int maxNum = nums[0];
-	a[0] = nums[0];
-	for (int i = 1; i < nums.size(); i++)
+
+int maxSubArray(vector<int>& nums)
+{
+	if(nums.size() == 0)
 	{
-		if (a[i - 1] + nums[i]>nums[i])
-			a[i] = a[i - 1] + nums[i];
-		else
-			a[i] = nums[i];
-		if (maxNum < a[i])
-			maxNum = a[i];
+		return 0;
 	}
-	delete[]a;
+	if(nums.size() == 1)
+	{
+		return nums[0];
+	}
+	int maxNum = nums[0];
+	vector<int> dp(nums.size());
+	dp[0] = nums[0];
+	for(int i = 1; i < nums.size(); i++)
+	{
+		if(nums[i] + dp[i-1] > nums[i])
+		{
+			dp[i] = dp[i - 1] + nums[i];
+		}
+		else
+		{
+			dp[i] = nums[i];
+		}
+		if(dp[i] > maxNum)
+		{
+			maxNum = dp[i];
+		}
+	}
 	return maxNum;
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+int main()
 {
 	vector<int> nums;
 	nums.push_back(-2);
@@ -51,4 +63,3 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << maxSubArray(nums) << endl;
 	return 0;
 }
-
