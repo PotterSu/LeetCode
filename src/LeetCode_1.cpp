@@ -14,35 +14,37 @@
 
 using namespace std;
 
+// vector<int> twoSum(vector<int>& nums, int target)
+// {
+//     vector<int> result;
+//     map<int, int> hash_map;
+//     for(int i = 0; i < nums.size(); i++)
+//     {
+//         hash_map.insert(make_pair(nums[i], i));
+//         int another = target - nums[i];
+//         if(hash_map.count(another) && i != hash_map[another])
+//         {
+//             result.push_back(i);
+//             result.push_back(hash_map[another]);
+//             return result;
+//         }
+//     }
+//
+//     return result;
+// }
+
 vector<int> twoSum(vector<int>& nums, int target)
 {
     vector<int> result;
     map<int, int> hash_map;
-    // //第一次遍历，存储所有的数
-    // for(int i = 0; i < nums.size(); i++)
-    // {
-    //     hash_map.insert(map<int, int>::value_type(nums[i], i));
-    // }
-    // //第二次遍历，查找
-    // for(int i = 0; i < nums.size(); i++)
-    // {
-    //     int another = target - nums[i];
-    //     if(hash_map.count(another) > 0 && i != hash_map[another])
-    //     {
-    //         result.push_back(i);
-    //         result.push_back(hash_map[another]);
-    //         return result;
-    //     }
-    // }
     for(int i = 0; i < nums.size(); i++)
     {
         hash_map.insert(make_pair(nums[i], i));
         int another = target - nums[i];
-        if(hash_map.count(another) && i != hash_map[another])
+        if(hash_map.find(another) != hash_map.end() && i != hash_map[another])
         {
             result.push_back(i);
             result.push_back(hash_map[another]);
-            return result;
         }
     }
 
@@ -58,7 +60,7 @@ int main()
     nums.push_back(7);
     nums.push_back(11);
     nums.push_back(15);
-    int target = 9;
+    int target = 26;
 
     vector<int> result = twoSum(nums, target);
 
