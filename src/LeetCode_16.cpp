@@ -1,48 +1,97 @@
 /*
-16.3Sum Closest
+16. 最接近的三数之和
+给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。
 
-Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
 
-For example, given array S = {-1 2 1 -4}, and target = 1.
-
-The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
-����˼�룺1.���ȶ�������������
-	      2.��������һ���������ͣ�ͷ��������ans������һ����target�Ĳ�ֵdiff
-		  3.����һ��i,j,k�ֱ���¼��������λ�ã����ⲻ��ѭ�������������������ĺͣ�
-		    ��������targetֱ��return
-			������target��ֵС�ڵ�ǰ��С��ֵdiff������diff�Լ�ans
-			����sum��target�Ĵ�С��ϵ����j,kλ��
+与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
 */
+
 #include "iostream"
 #include "string"
 #include "algorithm"
 #include "vector"
 #include "stack"
 
-int threeSumClosest(vector<int>& nums, int target) {
-	sort(nums.begin(), nums.end());
-	int ans = nums[0] + nums[1] + nums[2];
-	int diff = abs(ans - target);
-	for (int i = 0; i<nums.size(); i++)
-	{
-		int j = i + 1;
-		int k = nums.size() - 1;
-		while (j<k)
-		{
-			int sum = nums[i] + nums[j] + nums[k];
-			if (sum == target)
-				return sum;
-			if (abs(sum - target)<diff)
-			{
-				diff = abs(sum - target);
-				ans = sum;
-			}
-			if (sum<target)
-				j++;
-			if (sum>target)
-				k--;
-		}
+using namespace std;
 
+// int threeSumClosest(vector<int>& nums, int target) {
+// 	sort(nums.begin(), nums.end());
+// 	int ans = nums[0] + nums[1] + nums[2];
+// 	int diff = abs(ans - target);
+// 	for (int i = 0; i<nums.size(); i++)
+// 	{
+// 		int j = i + 1;
+// 		int k = nums.size() - 1;
+// 		while (j<k)
+// 		{
+// 			int sum = nums[i] + nums[j] + nums[k];
+// 			if (sum == target)
+// 				return sum;
+// 			if (abs(sum - target)<diff)
+// 			{
+// 				diff = abs(sum - target);
+// 				ans = sum;
+// 			}
+// 			if (sum<target)
+// 				j++;
+// 			if (sum>target)
+// 				k--;
+// 		}
+//
+// 	}
+// 	return ans;
+// }
+
+int threeSumClosest(vector<int>& nums, int target)
+{
+	if(nums.size() <= 2)
+		return 0;
+	//排序
+	sort(nums.begin(), nums.end());
+
+	int diff = abs(nums[0] + nums[1] + nums[2] - target);
+	int result = nums[0] + nums[1] + nums[2];
+	for(int i = 0; i < nums.size(); i++)
+	{
+		int left = i + 1;
+		int right = nums.size() - 1;
+		while(left < right)
+		{
+			if(nums[i] + nums[left] + nums[right] == target)
+			{
+				return target;
+			}
+			else
+			{
+				if(abs(nums[i] + nums[left] + nums[right] - target) < diff)
+				{
+					diff = abs(nums[i] + nums[left] + nums[right] - target);
+					result = nums[i] + nums[left] + nums[right];
+				}
+				if(nums[i] + nums[left] + nums[right] < target)
+				{
+					left++;
+				}
+				if(nums[i] + nums[left] + nums[right] > target)
+				{
+					right--;
+				}
+			}
+		}
 	}
-	return ans;
+	return result;
+}
+
+int main()
+{
+	vector<int> v;
+	v.push_back(-1);
+	v.push_back(2);
+	v.push_back(1);
+	v.push_back(-4);
+	int result = threeSumClosest(v, 1);
+	cout << result << endl;
+
+	return 0;
 }
