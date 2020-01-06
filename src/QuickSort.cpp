@@ -23,7 +23,7 @@ int quicksort(int* a, int left, int right)
 			while(i < j && a[i] <= flag)
 			{
 				i++;
-			}
+			} 
 			a[j] = a[i];
 		}
 		a[j] = flag;
