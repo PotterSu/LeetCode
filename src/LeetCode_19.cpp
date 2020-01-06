@@ -1,22 +1,15 @@
 /*
-19.
-¸ø¶¨Ò»¸öÁ´±í£¬É¾³ýÁ´±íµÄµ¹ÊýµÚ n ¸ö½Úµã£¬²¢ÇÒ·µ»ØÁ´±íµÄÍ·½áµã¡£
+19.åˆ é™¤é“¾è¡¨çš„å€’æ•°ç¬¬Nä¸ªèŠ‚ç‚¹
+ç»™å®šä¸€ä¸ªé“¾è¡¨ï¼Œåˆ é™¤é“¾è¡¨çš„å€’æ•°ç¬¬Â nÂ ä¸ªèŠ‚ç‚¹ï¼Œå¹¶ä¸”è¿”å›žé“¾è¡¨çš„å¤´ç»“ç‚¹ã€‚
 
-Ê¾Àý£º
+ç¤ºä¾‹ï¼š
 
-¸ø¶¨Ò»¸öÁ´±í: 1->2->3->4->5, ºÍ n = 2.
+ç»™å®šä¸€ä¸ªé“¾è¡¨: 1->2->3->4->5, å’Œ n = 2.
 
-µ±É¾³ýÁËµ¹ÊýµÚ¶þ¸ö½Úµãºó£¬Á´±í±äÎª 1->2->3->5.
-
-½âÌâË¼Â·£ºÊ×ÏÈÒªÖªµÀÁ´±íl1ÓÐ¶à³¤
-          È»ºó´´½¨Ò»¸ö·µ»ØÁ´±íµÄÍ·½ÚµãpNode£¬Ö¸ÏòÁ´±íl1£¬ÕâÊÇÎªÁËÈç¹ûÐèÒª£¬¿ÉÒÔÉ¾³ýl1µÚÒ»¸öÊý
-		  ÔÙ´´½¨¸öÖ¸ÕëlhÖ¸ÏòpNode£¬ÕâÊÇÎªÁË·µ»ØÍêÕûµÄpNodeÁ´±í
-		  ½ÓÏÂÀ´¾Í¸ù¾Ýl1µÄ³¤¶ÈÓëÐèÒªÉ¾³ýµÄÎ»ÖÃÖ®²î½øÐÐpNodeÖ¸ÕëÒÆ¶¯£¬É¾³ý¼´¿É
+å½“åˆ é™¤äº†å€’æ•°ç¬¬äºŒä¸ªèŠ‚ç‚¹åŽï¼Œé“¾è¡¨å˜ä¸º 1->2->3->5.
 */
 
 #include "iostream"
-#include "string"
-#include "Algorithm"
 #include "vector"
 #include "stack"
 
@@ -28,49 +21,42 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
-public:
-	ListNode* removeNthFromEnd(ListNode* head, int n) {
-		ListNode *pNode = head;
-		int nLength = 0;
-		while (pNode != NULL)
-		{
-			nLength++;
-			pNode = pNode->next;
-		}
-		//´´½¨·µ»ØÁ´±íµÄÍ·½Úµã
-		pNode = new ListNode(-1);
-		pNode->next = head;
-		//Ö¸Ïò·µ»ØÁ´±íµÄÍ·½Úµã£¬±ãÓÚ·µ»Ø
-		ListNode *lh = pNode;
-		//-1 0 1 2 3 4
-		int nIndex = 0;
-		while (nIndex < nLength - n)
-		{
-			pNode = pNode->next;
-			nIndex++;
-		}
-		pNode->next = pNode->next->next;
-		return lh->next;
+ListNode* removeNthFromEnd(ListNode* head, int n)
+{
+	int nLength = 0;
+	ListNode* pHead = new ListNode(-1);
+	pHead->next = head;
+	ListNode* pHeadTemp = pHead;
+	while(pHeadTemp != NULL)
+	{
+		nLength++;
+		pHeadTemp = pHeadTemp->next;
 	}
-};
+	pHeadTemp = pHead;
+	for(int i = 0; i < nLength - n - 1; i++)
+	{
+		pHeadTemp = pHeadTemp->next;
+	}
+	pHeadTemp->next = pHeadTemp->next->next;
+	return pHead->next;
+}
+
+
 int main()
 {
-	Solution* solution = new Solution();
 	ListNode *l1 = new ListNode(1);
 	ListNode *l12 = new ListNode(2);
 	ListNode *l13 = new ListNode(3);
 	l1->next = l12;
 	l12->next = l13;
 
-	ListNode *l3 = solution->removeNthFromEnd(l1, 3);
+	ListNode *l3 = removeNthFromEnd(l1, 1);
 	while (l3 != NULL)
 	{
 		std::cout << l3->val << std::endl;
 		l3 = l3->next;
 	}
 
-	delete(solution);
 	delete(l1);
 	delete(l3);
 	return 0;
