@@ -21,26 +21,44 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
+// ListNode* removeNthFromEnd(ListNode* head, int n)
+// {
+// 	int nLength = 0;
+// 	ListNode* pHead = new ListNode(-1);
+// 	pHead->next = head;
+// 	ListNode* pHeadTemp = pHead;
+// 	while(pHeadTemp != NULL)
+// 	{
+// 		nLength++;
+// 		pHeadTemp = pHeadTemp->next;
+// 	}
+// 	pHeadTemp = pHead;
+// 	for(int i = 0; i < nLength - n - 1; i++)
+// 	{
+// 		pHeadTemp = pHeadTemp->next;
+// 	}
+// 	pHeadTemp->next = pHeadTemp->next->next;
+// 	return pHead->next;
+// }
+
 ListNode* removeNthFromEnd(ListNode* head, int n)
 {
-	int nLength = 0;
 	ListNode* pHead = new ListNode(-1);
 	pHead->next = head;
-	ListNode* pHeadTemp = pHead;
-	while(pHeadTemp != NULL)
+	ListNode* pFore = pHead;
+	ListNode* pBack = pHead;
+	for(int i = 0; i < n; i++)
 	{
-		nLength++;
-		pHeadTemp = pHeadTemp->next;
+		pBack = pBack->next;
 	}
-	pHeadTemp = pHead;
-	for(int i = 0; i < nLength - n - 1; i++)
+	while(pBack->next != NULL)
 	{
-		pHeadTemp = pHeadTemp->next;
+		pFore = pFore->next;
+		pBack = pBack->next;
 	}
-	pHeadTemp->next = pHeadTemp->next->next;
+	pFore->next = pFore->next->next;
 	return pHead->next;
 }
-
 
 int main()
 {
