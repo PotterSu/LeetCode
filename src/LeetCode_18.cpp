@@ -1,79 +1,133 @@
 /*
-18.4Sum
+18.å››æ•°ä¹‹å’Œ
+ç»™å®šä¸€ä¸ªåŒ…å«Â n ä¸ªæ•´æ•°çš„æ•°ç»„Â numsÂ å’Œä¸€ä¸ªç›®æ ‡å€¼Â targetï¼Œåˆ¤æ–­Â numsÂ ä¸­æ˜¯å¦å­˜åœ¨å››ä¸ªå…ƒç´  aï¼Œbï¼ŒcÂ å’Œ dÂ ï¼Œä½¿å¾—Â a + b + c + dÂ çš„å€¼ä¸Â targetÂ ç›¸ç­‰ï¼Ÿæ‰¾å‡ºæ‰€æœ‰æ»¡è¶³æ¡ä»¶ä¸”ä¸é‡å¤çš„å››å…ƒç»„ã€‚
 
-For example, given array S = [1, 0, -1, 0, -2, 2], and target = 0.
+æ³¨æ„ï¼š
 
-A solution set is:
+ç­”æ¡ˆä¸­ä¸å¯ä»¥åŒ…å«é‡å¤çš„å››å…ƒç»„ã€‚
+
+ç¤ºä¾‹ï¼š
+
+ç»™å®šæ•°ç»„ nums = [1, 0, -1, 0, -2, 2]ï¼Œå’Œ target = 0ã€‚
+
+æ»¡è¶³è¦æ±‚çš„å››å…ƒç»„é›†åˆä¸ºï¼š
 [
-[-1,  0, 0, 1],
-[-2, -1, 1, 2],
-[-2,  0, 0, 2]
+  [-1,  0, 0, 1],
+  [-2, -1, 1, 2],
+  [-2,  0, 0, 2]
 ]
-
-½âÌâË¼Ïë£º1.Ê×ÏÈ¶ÔÊäÈë½øĞĞÅÅĞò
-		  2.¶¨ÒåÒ»¸öi,j,left£¬right·Ö±ğ¼ÇÂ¼ËÄ¸öÊıµÄÎ»ÖÃ£¬¶ÔÕâ²»¶ÏÑ­»·±éÀú£¬¼ÆËãËÄ¸öÊıµÄºÍ£¬
-		    Èç¹ûµÈÓÚtargetÖ±½Ó´æÈëresultÏòÁ¿ÖĞ
-			Èç¹û²»ÏàµÈ¸ù¾İsumÓëtargetµÄ´óĞ¡¹ØÏµ¸üĞÂright,leftÎ»ÖÃ
-			±ÜÃâÖØ¸´£ºÃ¿²ãÑ­»·ÅĞ¶Ïi£¬j,leftÊÇ·ñÓëÇ°Ò»¸öÏàµÈ£¬rightÊÇ·ñÓëºóÒ»¸öÏàµÈ£¬Èç¹ûÏàµÈÖ±½Ócontinue
-
-Ë¼ÏëÓë3sumÏàËÆ£¬ÕûÌå´óÖÂÏàÍ¬£¬Òª×¢Òâ±ÜÃâÖØ¸´µÄÎÊÌâ
 */
-#include "stdafx.h"
 #include "iostream"
-#include "string"
-#include "Algorithm"
 #include "vector"
-#include "stack"
 
 using namespace std;
-vector<vector<int>> fourSum(vector<int>& nums, int target) {
-	vector<vector<int>>result;
-	if (nums.size()<4)
-		return result;
-	sort(nums.begin(), nums.end());
-	for (int i = 0; i < nums.size() - 3; i++)
+// vector<vector<int>> fourSum(vector<int>& nums, int target) {
+// 	vector<vector<int>>result;
+// 	if (nums.size()<4)
+// 		return result;
+// 	sort(nums.begin(), nums.end());
+// 	for (int i = 0; i < nums.size() - 3; i++)
+// 	{
+// 		if (i>0 && nums[i] == nums[i - 1])
+// 			continue;
+// 		for (int j = i + 1; j < nums.size() - 2; j++)
+// 		{
+// 			if (j>i + 1 && nums[j] == nums[j - 1])
+// 				continue;
+// 			int left = j + 1;
+// 			int right = nums.size() - 1;
+// 			while (left < right)
+// 			{
+// 				if (left > j + 1 && nums[left] == nums[left - 1])
+// 				{
+// 					left++;
+// 					continue;
+// 				}
+// 				if (right < nums.size() - 1 && nums[right] == nums[right + 1])
+// 				{
+// 					right--;
+// 					continue;
+// 				}
+// 				int sum = nums[i] + nums[j] + nums[left] + nums[right];
+// 				if (target == sum)
+// 				{
+// 					vector<int> temp;
+// 					temp.push_back(nums[i]);
+// 					temp.push_back(nums[j]);
+// 					temp.push_back(nums[left]);
+// 					temp.push_back(nums[right]);
+// 					result.push_back(temp);
+// 					left++;
+// 					right--;
+// 				}
+// 				if (sum < target)
+// 					left++;
+// 				if (sum > target)
+// 					right--;
+//
+// 			}
+//
+// 		}
+//
+// 	}
+// 	return result;
+// }
+
+vector<vector<int>> fourSum(vector<int>& nums, int target)
+{
+	vector<vector<int>> result;
+	if(nums.size() < 4)
 	{
-		if (i>0 && nums[i] == nums[i - 1])
+		return result;
+	}
+	sort(nums.begin(), nums.end());
+	for(int i = 0; i < nums.size() - 3; i++)
+	{
+		if(i > 0 && nums[i] == nums[i - 1])
 			continue;
-		for (int j = i + 1; j < nums.size() - 2; j++)
+		int a = nums[i];
+		for(int j = i + 1; j < nums.size() - 2; j++)
 		{
-			if (j>i + 1 && nums[j] == nums[j - 1])
+			if((j > i + 1) && nums[j] == nums[j-1])
 				continue;
+			int b = nums[j];
 			int left = j + 1;
 			int right = nums.size() - 1;
-			while (left < right)
+			while(left < right)
 			{
-				if (left > j + 1 && nums[left] == nums[left - 1])
+				if((left > j + 1) && nums[left] == nums[left - 1])
 				{
 					left++;
 					continue;
 				}
-				if (right < nums.size() - 1 && nums[right] == nums[right + 1])
+				if(right < nums.size() - 1 && nums[right + 1] == nums[right])
 				{
 					right--;
 					continue;
 				}
-				int sum = nums[i] + nums[j] + nums[left] + nums[right];
-				if (target == sum)
+				if(a + b + nums[left] + nums[right] < target)
+				{
+					left++;
+					continue;
+				}
+				if(a + b + nums[left] + nums[right] > target)
+				{
+					right--;
+					continue;
+				}
+				if(a + b + nums[left] + nums[right] == target)
 				{
 					vector<int> temp;
-					temp.push_back(nums[i]);
-					temp.push_back(nums[j]);
+					temp.push_back(a);
+					temp.push_back(b);
 					temp.push_back(nums[left]);
 					temp.push_back(nums[right]);
 					result.push_back(temp);
 					left++;
 					right--;
 				}
-				if (sum < target)
-					left++;
-				if (sum > target)
-					right--;
-
 			}
-
 		}
-
 	}
 	return result;
 }
@@ -81,27 +135,22 @@ vector<vector<int>> fourSum(vector<int>& nums, int target) {
 int main()
 {
 	vector<int> nums;
-	nums.push_back(-2);
+	nums.push_back(-3);
 	nums.push_back(-1);
 	nums.push_back(0);
-	nums.push_back(0);
-	nums.push_back(1);
 	nums.push_back(2);
-	int target = 0;
+	nums.push_back(4);
+	nums.push_back(5);
+	int target = 1;
 	vector<vector<int>>result = fourSum(nums, target);
-	for (int i = 0; i < nums.size(); i++)
-	{
-		cout << nums[i] << " ";
-	}
 
 	for (int i = 0; i < result.size(); i++)
 	{
-		cout << endl;
 		for (int j = 0; j < result[i].size(); j++)
 		{
 			cout << result[i][j] << " ";
 		}
+		cout << endl;
 	}
-	while (1);
 	return 0;
 }
