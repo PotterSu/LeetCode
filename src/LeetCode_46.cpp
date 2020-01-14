@@ -1,57 +1,47 @@
 /*
-46. Permutations
+46. å…¨æ’åˆ—
 
-Given a collection of distinct numbers, return all possible permutations.
+ç»™å®šä¸€ä¸ªæ²¡æœ‰é‡å¤æ•°å­—çš„åºåˆ—ï¼Œè¿”å›å…¶æ‰€æœ‰å¯èƒ½çš„å…¨æ’åˆ—ã€‚
 
-For example,
-[1,2,3] have the following permutations:
+ç¤ºä¾‹:
+
+è¾“å…¥: [1,2,3]
+è¾“å‡º:
 [
-[1,2,3],
-[1,3,2],
-[2,1,3],
-[2,3,1],
-[3,1,2],
-[3,2,1]
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
 ]
-
-½âÌâË¼Â·£ºÓÃµİ¹é»ØËİÀ´×ö£¨dfs£©
-          ¶ÔÓÚ¸ø¶¨µÄnumsÏòÁ¿ÓĞnÎ»Êı£¬r´Ó0¿ªÊ¼Ïòn-1ÒÆ¶¯±íÊ¾µ±Ç°µÚrÎ»¿ÉÒÔÈ¡ÄÄĞ©Êı×ÖµÄÇé¿ö£¬
-		  £¨ÏÔÈ»r=0Ê±£¬¿ÉÒÔÈ¡n¸öÊı£¬r=1Ê±¿ÉÒÔÈ¡n-1¸öÊı£¬ÒòÎªµÚ0Î»ÒÑ¾­È·¶¨£©Í¨¹ıforÑ­»·£¬·Ö±ğ½«r+1µ½n-1µÄÊı×ÖÓëµÚrÎ»Êı×Öµ÷»»
-		  ÄÇÃ´ÓĞÁËµÚrÎ»µÄÇé¿ö£¬Í¨¹ıdfs(r+1,n,nums£¬result)µİ¹é±íÊ¾ºóĞøÎ»×éºÏµÄÇé¿ö£¬
-		  Ò»µ©rÓën-1ÏàµÈ£¬ËµÃ÷µ½ÁË×îºóÒ»Î»£¬Ç°Ãæ¶¼ÒÑ¾­ÅÅºÃ£¬¿ÉÒÔÖ±½Ó´æ´¢nums¡£
-		  È»ºóµİ¹é·´Ïò»ØËİÖ±ÖÁËùÓĞµÄnumsÇé¿ö¶¼±»´æ´¢
 */
 
 #include "iostream"
-#include "string"
-#include "Algorithm"
 #include "vector"
 #include "stack"
 
 using namespace std;
 
-void dfs(int r, int n, vector<int> nums, vector<vector<int>> &result)
+void dfs(int root, vector<int> nums, vector<vector<int>>& result)
 {
-	if (r == n - 1)
+	if(root == nums.size() - 1)
 	{
 		result.push_back(nums);
-		return;
 	}
-	for (int i = r; i < n; i++)//1 2 3
+	for(int i = root; i < nums.size(); i++)
 	{
-		int temp = nums[r];
-		nums[r] = nums[i];
-		nums[i] = temp;
-		for (int j = 0; j < nums.size(); j++)
-			cout << nums[j] << " ";
-		dfs(r + 1, n, nums, result);
+		int temp = nums[i];
+		nums[i] = nums[root];
+		nums[root] = temp;
+		dfs(root + 1, nums, result);
 	}
-
 }
 
-vector<vector<int>> permute(vector<int>& nums) {
+vector<vector<int>> permute(vector<int>& nums)
+{
 	vector<vector<int>> result;
-	dfs(0, nums.size(), nums, result);
+	dfs(0, nums, result);
 	return result;
 }
 
@@ -68,7 +58,5 @@ int main()
 		for (int j = 0; j < result[i].size(); j++)
 			cout << result[i][j];
 	}
-	while (1);
 	return 0;
 }
-

@@ -6,7 +6,7 @@ project(${LIBRARY_NAME})
 set(CMAKE_CXX_STANDARD 11)
 
 # 搜集源码文件
-file(GLOB SRC ../src/LeetCode_64.cpp)
+file(GLOB SRC ../src/LeetCode_46.cpp)
 
 set(SOURCE_FILES ${SRC})
 
