@@ -24,7 +24,7 @@
 using namespace std;
 
 void dfs(int root, vector<int> nums, vector<vector<int>>& result)
-{
+{ 
 	if(root == nums.size() - 1)
 	{
 		result.push_back(nums);
