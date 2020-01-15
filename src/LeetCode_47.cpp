@@ -1,57 +1,50 @@
 /*
-47. Permutations II
+47. å…¨æ’åˆ— II
 
-Given a collection of numbers that might contain duplicates, return all possible unique permutations.
+ç»™å®šä¸€ä¸ªå¯åŒ…å«é‡å¤æ•°å­—çš„åºåˆ—ï¼Œè¿”å›æ‰€æœ‰ä¸é‡å¤çš„å…¨æ’åˆ—ã€‚
 
-For example,
-[1,1,2] have the following unique permutations:
+ç¤ºä¾‹:
+
+è¾“å…¥: [1,1,2]
+è¾“å‡º:
 [
-[1,1,2],
-[1,2,1],
-[2,1,1]
+  [1,1,2],
+  [1,2,1],
+  [2,1,1]
 ]
-
-½âÌâË¼Â·£ºÕûÌåË¼Â·ÓëPermutationsÏàÍ¬£¬Î¨Ò»ĞèÒª¿¼ÂÇµÄÊÇÖØ¸´µÄÎÊÌâ
-          ÓÃµİ¹é»ØËİÀ´×ö£¨dfs£©
-		  Ê×ÏÈ¶Ônums½øĞĞÅÅĞò£¡
-          ¶ÔÓÚ¸ø¶¨µÄnumsÏòÁ¿ÓĞnÎ»Êı£¬r´Ó0¿ªÊ¼Ïòn-1ÒÆ¶¯±íÊ¾µ±Ç°µÚrÎ»¿ÉÒÔÈ¡ÄÄĞ©Êı×ÖµÄÇé¿ö£¬
-		  £¨ÏÔÈ»r=0Ê±£¬Èç¹ûÃ»ÓĞÖØ¸´µÄÔªËØ¿ÉÒÔÈ¡n¸öÊı£¬r=1Ê±¿ÉÒÔÈ¡n-1¸öÊı£¬ÒòÎªµÚ0Î»ÒÑ¾­È·¶¨£©Í¨¹ıforÑ­»·£¬·Ö±ğ½«i=r+1µ½n-1µÄÊı×ÖÓëµÚrÎ»Êı×Öµ÷»»
-		  ×¢Òâ£ºÈç¹ûÒ»µ©Åöµ½nums[i]==nums[r]£¬Ö±½ÓÌø¹ı£¬²»½øĞĞµ÷»»£¬µ÷»»µÄ»°»á³öÏÖÖØ¸´Çé¿ö£¡£¡£¡
-		  ÄÇÃ´ÓĞÁËµÚrÎ»µÄÇé¿ö£¬Í¨¹ıdfs(r+1,n,nums£¬result)µİ¹é±íÊ¾ºóĞøÎ»×éºÏµÄÇé¿ö£¬
-		  Ò»µ©rÓën-1ÏàµÈ£¬ËµÃ÷µ½ÁË×îºóÒ»Î»£¬Ç°Ãæ¶¼ÒÑ¾­ÅÅºÃ£¬¿ÉÒÔÖ±½Ó´æ´¢nums¡£
-		  È»ºóµİ¹é·´Ïò»ØËİÖ±ÖÁËùÓĞµÄnumsÇé¿ö¶¼±»´æ´¢
 */
 
 #include "iostream"
-#include "string"
-#include "Algorithm"
-#include "vector"
-#include "stack"
+#include <vector>
 
 using namespace std;
-void dfs(int r, int n, vector<int> nums, vector<vector<int>> &result)
+
+void dfs(int root, vector<int> nums, vector<vector<int>>& result)
 {
-	if (r == n - 1)
+	if(root == nums.size() - 1)
 	{
 		result.push_back(nums);
 		return;
 	}
-	dfs(r + 1, n, nums, result);
-	for (int i = r + 1; i < n; i++)
+
+	for(int i = root; i < nums.size(); i++)
 	{
-		if (nums[i] == nums[r])
+		if(i > root && nums[i] == nums[root])
+		{
 			continue;
-		int temp = nums[r];
-		nums[r] = nums[i];
-		nums[i] = temp;
-		dfs(r + 1, n, nums, result);
+		}
+		int temp = nums[i];
+		nums[i] = nums[root];
+		nums[root] = temp;
+		dfs(root + 1, nums, result);
 	}
 }
 
-vector<vector<int>> permuteUnique(vector<int>& nums) {
-	sort(nums.begin(), nums.end());
+vector<vector<int>> permuteUnique(vector<int>& nums)
+{
 	vector<vector<int>> result;
-	dfs(0, nums.size(), nums, result);
+	sort(nums.begin(), nums.end());
+	dfs(0, nums, result);
 	return result;
 }
 
@@ -69,7 +62,6 @@ int main()
 		for (int j = 0; j < result[i].size(); j++)
 			cout << result[i][j];
 	}
-	while (1);
+
 	return 0;
 }
-
