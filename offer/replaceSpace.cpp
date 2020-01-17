@@ -1,5 +1,5 @@
 /*
-一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。
+请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
 */
 
 #include "iostream"
@@ -7,24 +7,45 @@
 
 using namespace std;
 
-int Fibonacci(int n)
+void replaceSpace(char *str,int length)
 {
-    if(n == 0)
-        return 0;
-    vector<int> a(n + 1);
-    a[0] = 0;
-    a[1] = 1;
-    for(int i = 2; i <= n; i++)
+    //计算原始字符串长度
+    int nOriLength = 0;
+    while(str[nOriLength] != '\0')
     {
-        a[i] = a[i - 1] + a[i - 2];
+        nOriLength++;
     }
-    return a[n];
+    if(nOriLength + 1 > length)
+        return;
+
+    int nSpaceLength = 0;
+    for(int i = 0; i < nOriLength; i++)
+    {
+        if(str[i] == ' ')
+            nSpaceLength++;
+    }
+    int nNewLength = nOriLength + nSpaceLength * 2;
+    int curIndex = nNewLength;
+    for(int oriIndex = nOriLength; oriIndex >= 0; oriIndex--)
+    {
+        if(str[oriIndex] == ' ')
+        {
+            str[curIndex--] = '0';
+            str[curIndex--] = '2';
+            str[curIndex--] = '%';
+        }
+        else
+        {
+            str[curIndex--] = str[oriIndex];
+        }
+    }
 }
 
 int main()
 {
-	int result = Fibonacci(3);
-	cout << result << endl;
+    char str[20] = " We are Happy";
+	replaceSpace(str, 20);
+	cout << str << endl;
 
 	return 0;
 }
