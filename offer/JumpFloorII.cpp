@@ -7,11 +7,29 @@
 
 using namespace std;
 
+//1   1
+//2   2
+//3   4
+//4   8
+
 int jumpFloorII(int number)
 {
 	if(number == 0 || number == 1)
 		return 1;
-	
+	if(number == 2)
+		return 2;
+	vector<int> a(number + 1);
+	a[1] = 1;
+	a[2] = 2;
+	for(int i = 3; i <= number; i++)
+	{
+		a[i] = 1;
+		for(int j = 0; j < i - 1; j++)
+		{
+			a[i] *= 2;
+		}
+	}
+	return a[number];
 }
 
 // int jumpFloorII(int number)
@@ -36,7 +54,7 @@ int jumpFloorII(int number)
 
 int main()
 {
-	int result = jumpFloorII(10);
+	int result = jumpFloorII(4);
 	cout << result << endl;
 
 	return 0;
