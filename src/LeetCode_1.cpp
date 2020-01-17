@@ -14,25 +14,6 @@
 
 using namespace std;
 
-// vector<int> twoSum(vector<int>& nums, int target)
-// {
-//     vector<int> result;
-//     map<int, int> hash_map;
-//     for(int i = 0; i < nums.size(); i++)
-//     {
-//         hash_map.insert(make_pair(nums[i], i));
-//         int another = target - nums[i];
-//         if(hash_map.count(another) && i != hash_map[another])
-//         {
-//             result.push_back(i);
-//             result.push_back(hash_map[another]);
-//             return result;
-//         }
-//     }
-//
-//     return result;
-// }
-
 vector<int> twoSum(vector<int>& nums, int target)
 {
     vector<int> result;
