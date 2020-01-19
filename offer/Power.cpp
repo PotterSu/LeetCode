@@ -9,30 +9,47 @@ using namespace std;
 
 class Solution {
 public:
+    // double Power(double base, int exponent)
+    // {
+    //     double result = 1.0;
+    //     if(exponent == 0)
+    //         return result;
+    //     if(base == 0)
+    //         return 0.0;
+    //
+    //     if(exponent > 0)
+    //     {
+    //         for(int i = 0; i < exponent; i++)
+    //         {
+    //             result *= base;
+    //         }
+    //     }
+    //     else if(exponent < 0)
+    //     {
+    //         for(int i = 0; i < -exponent; i++)
+    //         {
+    //             result /= base;
+    //         }
+    //     }
+    //
+    //     return result;
+    // }
     double Power(double base, int exponent)
     {
-        double result = 1.0;
+        double result = 1;
         if(exponent == 0)
             return result;
         if(base == 0)
-            return 0.0;
-
-        if(exponent > 0)
+            return base;
+        int temp = exponent > 0 ? exponent : -exponent;
+        while(temp != 0)
         {
-            for(int i = 0; i < exponent; i++)
-            {
+            if(temp & 1)
                 result *= base;
-            }
+            base *= base;
+            temp = temp >> 1;
         }
-        else if(exponent < 0)
-        {
-            for(int i = 0; i < -exponent; i++)
-            {
-                result /= base;
-            }
-        }
-
-        return result;
+        return exponent > 0 ? result : (double)1 / result;
     }
 };
 
