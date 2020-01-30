@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 # 搜集源码文件
 # file(GLOB SRC ../src/LeetCode_1.cpp)
-file(GLOB SRC ../offer/TreeSymmetrical.cpp)
+file(GLOB SRC ../offer/TreeBalance.cpp)
 
 set(SOURCE_FILES ${SRC})
 
