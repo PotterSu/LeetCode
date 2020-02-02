@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 # 搜集源码文件
 # file(GLOB SRC ../src/LeetCode_1.cpp)
-file(GLOB SRC ../offer/TreePrintZ.cpp)
+file(GLOB SRC ../offer/IsPopOrder.cpp)
 
 set(SOURCE_FILES ${SRC})
 
